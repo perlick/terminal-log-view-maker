@@ -1,13 +1,17 @@
 <html>
 <head>
+  <meta charset="utf-8"/>
   <script>
-    function process(){
-      prompt_regex = document.getElementById('prompt').value;
-      log_raw = document.getElementById('log').value;
+
+    function breakAndHighlight(log_raw, prompt_regex) {
 
       //replace new lines with <br>
       log_raw = log_raw.replace( /\n\r?/g, '<br>');
       log_raw = log_raw.concat('<br>');
+
+      if(prompt_regex === ""){
+        return log_raw;
+      }
 
       //separate commands and results
       log_raw = log_raw.replace(new RegExp(prompt_regex + ".*?<br>", 'g'), '</div><div class="command">$&</div><div class="result">');
@@ -23,8 +27,27 @@
       //add prompt highlighting
       log_raw = log_raw.replace(new RegExp(prompt_regex, 'g'), '<span class="prompt">$&</span>');
 
+      return log_raw;
+    }
+
+    function process(){
+      prompt_regex = document.getElementById('prompt').value;
+      log_raw = document.getElementById('sample').innerHTML.replace( /<div class="note-icon".*?<\/div>/g, '');
+      log_raw = document.getElementById('sample').innerHTML.replace( /<span class="line-number">.*?<\/span>/g, '');
+
+      //log_raw = breakAndHighlight(log_raw, prompt_regex);
+
+      //add stop divs
+      log_raw = '<div name="stop"></div>'.concat(log_raw).concat('<div name="stop"></div>');
+
+      //add view all and reset buttons
+      log_raw = '<center>Press \'j\' to advance and \'k\' to backtrack.</center><center><button onclick="showAll()">View All</button><button onclick="reset()">Reset</button></center>'.concat(log_raw);
+
+      //add body tags
+      log_raw = '<body onload="number();">'.concat(log_raw).concat('</body>');
+
       //add head and style elements to log
-      head_style = '<head>  <script>    document.addEventListener("keypress", function(event) {      if (event.keyCode == 106) {        current = document.getElementsByName("current")[0];        if(current.nextSibling.getAttribute("name") !== "stop") {          current.setAttribute("name", "");          current.nextSibling.style.display = "block";          current.nextSibling.setAttribute("name", "current");          window.scrollTo(0,document.body.scrollHeight);        }      }      if (event.keyCode == 107) {        current = document.getElementsByName("current")[0];        if(current.previousSibling.getAttribute("name") !== "stop") {          current.setAttribute("name", "");          current.style.display = "none";          current.previousSibling.style.display = "block";          current.previousSibling.setAttribute("name", "current");          window.scrollTo(0,document.body.scrollHeight);        }      }    })    function showAll(){      commands = document.getElementsByClassName("command");      results = document.getElementsByClassName("result");      var i;      for (i = 0; i < commands.length; i++) {        commands.item(i).style.display = "block";        commands.item(i).setAttribute("name", "");      }      for (i = 0; i < results.length; i++) {        results.item(i).style.display = "block";        results.item(i).setAttribute("name", "");      }      commands.item(commands.length - 1).style.display = "block";      commands.item(commands.length - 1).setAttribute("name", "current");    }    function reset(){      commands = document.getElementsByClassName("command");      results = document.getElementsByClassName("result");      var i;      for (i = 0; i < commands.length; i++) {        commands.item(i).style.display = "none";        commands.item(i).setAttribute("name", "");      }      for (i = 0; i < results.length; i++) {        results.item(i).style.display = "none";        results.item(i).setAttribute("name", "");      }      commands.item(0).style.display = "block";      commands.item(0).setAttribute("name", "current");    }    function number(){      commands = document.getElementsByClassName("command");      var i;      for (i = 0; i < commands.length; i++) {        var newItem = document.createElement("SPAN");        newItem.setAttribute("class", "line-number");        var textnode = document.createTextNode(i+1 + " ");        newItem.appendChild(textnode);        commands.item(i).insertBefore(newItem, commands.item(i).childNodes[0]);      }    }  </scr'+'ipt></head><style>  .prompt {    color: lightgreen;  }  .workingDIR {    color: rgb(129, 191, 212);  }  .line-number {    color: gray;  }  .note {    display: block;    color: gray;    float: right;  }  body {    background-color: #282C34;    color: white;    font-family: "Lucida Console", Courier, monospace;  }  div {    display: none;  }</style>';
+      head_style = '<head><script> document.addEventListener("keypress", function(event){if (event.keyCode==106){current=document.getElementsByName("current")[0]; if(current.nextSibling.getAttribute("name") !=="stop"){current.setAttribute("name", ""); current.nextSibling.style.display="block"; current.nextSibling.setAttribute("name", "current"); window.scrollTo(0,document.body.scrollHeight);}}if (event.keyCode==107){current=document.getElementsByName("current")[0]; if(current.previousSibling.getAttribute("name") !=="stop"){current.setAttribute("name", ""); current.style.display="none"; current.previousSibling.style.display="block"; current.previousSibling.setAttribute("name", "current"); window.scrollTo(0,document.body.scrollHeight);}}}); function showAll(){commands=document.getElementsByClassName("command"); results=document.getElementsByClassName("result"); var i; for (i=0; i < commands.length; i++){commands.item(i).style.display="block"; commands.item(i).setAttribute("name", "");}for (i=0; i < results.length; i++){results.item(i).style.display="block"; results.item(i).setAttribute("name", "");}commands.item(commands.length - 1).style.display="block"; commands.item(commands.length - 1).setAttribute("name", "current");}function reset(){commands=document.getElementsByClassName("command"); results=document.getElementsByClassName("result"); var i; for (i=0; i < commands.length; i++){commands.item(i).style.display="none"; commands.item(i).setAttribute("name", "");}for (i=0; i < results.length; i++){results.item(i).style.display="none"; results.item(i).setAttribute("name", "");}commands.item(0).style.display="block"; commands.item(0).setAttribute("name", "current");}function number(){commands=document.getElementsByClassName("command"); var i; for (i=0; i < commands.length; i++){var newItem=document.createElement("SPAN"); newItem.setAttribute("class", "line-number"); var textnode=document.createTextNode(i+1 + " "); newItem.appendChild(textnode); commands.item(i).insertBefore(newItem, commands.item(i).childNodes[0]);}}</scr'+'ipt></head><style>.prompt{color: lightgreen;}.workingDIR{color: rgb(129, 191, 212);}.line-number{color: gray;}.note{display: block; color: gray; float: right;}body{background-color: #282C34; color: white; font-family: "Lucida Console", Courier, monospace;}div{display: none;}</style>';
       log_raw = head_style.concat(log_raw);
 
       //wrap in <html> tags
@@ -33,61 +56,18 @@
       //test code to view string as page
       var wnd = window.open("about:blank", "_blank");
       wnd.document.write(log_raw);
-    }
-  </script>
-  <script>
-  document.addEventListener("keypress", function(event) {
-      if (event.keyCode == 106) {
-        current = document.getElementsByName("current")[0];
-        if(current.nextSibling.getAttribute("name") !== 'stop') {
-          current.setAttribute("name", "");
-          current.nextSibling.style.display = "block";
-          current.nextSibling.setAttribute("name", "current");
-          window.scrollTo(0,document.body.scrollHeight);
-        }
-      }
-      if (event.keyCode == 107) {
-        current = document.getElementsByName("current")[0];
-        if(current.previousSibling.getAttribute("name") !== 'stop') {
-          current.setAttribute("name", "");
-          current.style.display = "none";
-          current.previousSibling.style.display = "block";
-          current.previousSibling.setAttribute("name", "current");
-          window.scrollTo(0,document.body.scrollHeight);
-        }
-      }
-    })
-
-    function showAll(){
-      commands = document.getElementsByClassName("command");
-      results = document.getElementsByClassName("result");
-      var i;
-      for (i = 0; i < commands.length; i++) {
-        commands.item(i).style.display = "block";
-        commands.item(i).setAttribute("name", "");
-      }
-      for (i = 0; i < results.length; i++) {
-        results.item(i).style.display = "block";
-        results.item(i).setAttribute("name", "");
-      }
-      commands.item(commands.length - 1).style.display = "block";
-      commands.item(commands.length - 1).setAttribute("name", "current");
+      wnd.document.close(log_raw);
     }
 
-    function reset(){
-      commands = document.getElementsByClassName("command");
-      results = document.getElementsByClassName("result");
-      var i;
-      for (i = 0; i < commands.length; i++) {
-        commands.item(i).style.display = "none";
-        commands.item(i).setAttribute("name", "");
-      }
-      for (i = 0; i < results.length; i++) {
-        results.item(i).style.display = "none";
-        results.item(i).setAttribute("name", "");
-      }
-      commands.item(0).style.display = "block";
-      commands.item(0).setAttribute("name", "current");
+    function generate_sample(){
+      log_raw = document.getElementById('log').value;
+      regex = document.getElementById('prompt').value;
+
+      log_raw = breakAndHighlight(log_raw, regex);
+
+      document.getElementById('sample').innerHTML = log_raw;
+      number();
+      addNoteIcons();
     }
 
     function number(){
@@ -101,14 +81,57 @@
         commands.item(i).insertBefore(newItem, commands.item(i).childNodes[0]);
       }
     }
+
+    function addNoteIcons(){
+      commands = document.getElementsByClassName("command");
+      var i;
+      for (i = 0; i < commands.length; i++) {
+        var newItem = document.createElement("DIV");
+        newItem.setAttribute("class", "note-icon");
+        newItem.setAttribute("onclick", "insertNote(this);");
+        var textnode = document.createTextNode("+");
+        newItem.appendChild(textnode);
+        commands.item(i).insertBefore(newItem, commands.item(i).lastChild);
+      }
+    }
+
+    function insertNote(note_item){
+      newItem = document.createElement("DIV");
+      newItem.setAttribute("class", "note-form");
+      val = note_item.innerText !== "+" ? note_item.innerText : "";
+      newItem.innerHTML = '<input type="text" value="'+val+'"> <button onclick="addNote(this.parentElement);">Add Note</button> <button onclick="closeNote(this.parentElement);">Cancel</button>';
+      note_item.parentNode.replaceChild(newItem, note_item);
+    }
+
+    function addNote(note_item){
+      if(note_item.firstElementChild.value === ""){
+        closeNote(note_item);
+      }else{
+        var newItem = document.createElement("DIV");
+        newItem.setAttribute("class", "note");
+        newItem.setAttribute("onclick", "insertNote(this);");
+        var textnode = document.createTextNode(note_item.firstElementChild.value);
+        newItem.appendChild(textnode);
+        note_item.parentNode.replaceChild(newItem, note_item);
+      }
+    }
+
+    function closeNote(note_item){
+      var newItem = document.createElement("DIV");
+      newItem.setAttribute("class", "note-icon");
+      newItem.setAttribute("onclick", "insertNote(this);");
+      var textnode = document.createTextNode("+");
+      newItem.appendChild(textnode);
+      note_item.parentNode.replaceChild(newItem, note_item);
+    }
   </script>
 </head>
 <style>
-  .command {
-    display: none;
+  .command:hover {
+    background-color: #474a51;
   }
-  .result {
-    display: none;
+  .command:hover .note-icon{
+    display: block;
   }
   .prompt {
     color: lightgreen;
@@ -123,6 +146,26 @@
     display: block;
     color: gray;
     float: right;
+    transition: transform .2s;
+    cursor: pointer;
+    transform-origin: right;
+  }
+  .note:hover {
+    transform: scale(1.3);
+  }
+  .note-icon {
+    display: none;
+    color: lightblue;
+    float: right;
+    transition: transform .2s;
+    cursor: pointer;
+    transform-origin: right;
+  }
+  .note-icon:hover {
+    transform: scale(1.5);
+  }
+  .note-form {
+    float: right;
   }
   body {
     background-color: #282C34;
@@ -131,25 +174,25 @@
   }
 </style>
 <body>
-    <label for="prompt">Prompt Regex:</label>
-    <input type="text" id="prompt" name="prompt" value="pi@raspberrypi"><br>
 
-    <label for="log">Terminal Log Text:</label><br>
+    <label for="log">Step 1 -- Terminal Log Text:</label><br>
     <!-- <textarea name="message" id="log" rows="20" cols="50">Paste your terminal session log here.</textarea><br> -->
-    <textarea name="message" id="log" rows="20" cols="50">Wi-Fi is currently blocked by rfkill.
-    Use raspi-config to set the country before use.
+    <textarea name="message" id="log" rows="20" cols="50" oninput="generate_sample()">
+Wi-Fi is currently blocked by rfkill.
+Use raspi-config to set the country before use.
 
-    pi@raspberrypi:~ $ cd /var/www/git/deploy.git/
-    pi@raspberrypi:/var/www/git/deploy.git $ git log --oneline --graph --all
-    *   a0ef39f (HEAD -> master) Initial commit
-    pi@raspberrypi:/var/www/git/deploy.git $ cd /var/www/html/sandbox-1
-    pi@raspberrypi:/var/www/html/sandbox-1 $ git log --oneline --graph --all
-    *   a0ef39f (HEAD -> master, origin/master, origin/HEAD, deploy/master) Initial commit
-    pi@raspberrypi:/var/www/html/sandbox-1 $ cd /var/www/html/sandbox-2</textarea><br>
+pi@raspberrypi:~ $ cd /var/www/git/deploy.git/
+pi@raspberrypi:/var/www/git/deploy.git $ git log --oneline --graph --all
+*   a0ef39f (HEAD -> master) Initial commit
+pi@raspberrypi:/var/www/git/deploy.git $ cd /var/www/html/sandbox-1
+pi@raspberrypi:/var/www/html/sandbox-1 $ git log --oneline --graph --all
+*   a0ef39f (HEAD -> master, origin/master, origin/HEAD, deploy/master) Initial commit
+pi@raspberrypi:/var/www/html/sandbox-1 $ cd /var/www/html/sandbox-2</textarea><br>
+    <label for="prompt">Step 2 -- Prompt Regex:</label>
+    <input type="text" id="prompt" name="prompt" oninput="generate_sample()" value="pi@raspberrypi:"><br>
+
     <button onclick="process()">Preview</button>
-    <!-- <center>Press 'j' to advance and 'k' to backtrack.</center>
 
-    <center><button onclick="showAll()">View All</button><button onclick="reset()">Reset</button></center>
-    <div id="preview" style="display: block;"></div>-->
+    <div id="sample"></div>
 </body>
 </html>
