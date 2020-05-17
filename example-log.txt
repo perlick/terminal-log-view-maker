@@ -1,0 +1,1043 @@
+Microsoft Windows [Version 10.0.18362.778]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+C:\Users\mattp>ssh pi@192.168.1.130
+pi@192.168.1.130's password:
+Linux raspberrypi 4.19.97-v7+ #1294 SMP Thu Jan 30 13:15:58 GMT 2020 armv7l
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed May  6 16:39:30 2020 from 192.168.1.127
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+
+Wi-Fi is currently blocked by rfkill.
+Use raspi-config to set the country before use.
+
+pi@raspberrypi:~ $ cd /var/www/git/deploy.git/
+pi@raspberrypi:/var/www/git/deploy.git $ git log --oneline --graph --all
+*   a0ef39f (HEAD -> master) Initial commit
+pi@raspberrypi:/var/www/git/deploy.git $ cd /var/www/html/sandbox-1
+pi@raspberrypi:/var/www/html/sandbox-1 $ git log --oneline --graph --all
+*   a0ef39f (HEAD -> master, origin/master, origin/HEAD, deploy/master) Initial commit
+pi@raspberrypi:/var/www/html/sandbox-1 $ cd /var/www/html/sandbox-2
+pi@raspberrypi:/var/www/html/sandbox-2 $ git log --oneline --graph --all
+*   a0ef39f (HEAD -> master, origin/master, origin/HEAD, deploy/master) Initial commit
+pi@raspberrypi:/var/www/html/sandbox-2 $ cd /var/www/html/sandbox-3
+pi@raspberrypi:/var/www/html/sandbox-3 $ git log --oneline --graph --all
+*   a0ef39f (HEAD -> master, origin/master, origin/HEAD, deploy/master) Initial commit
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout -b test-case-1
+Switched to a new branch 'test-case-1'
+pi@raspberrypi:/var/www/html/sandbox-3 $ echo "test change 1" > test-case-1.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git add test-case-1.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git commit -m"making test case 1 change"
+[test-case-1 dd2f2f1] making test case 1 change
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test-case-1.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout -b test-case-2
+Switched to a new branch 'test-case-2'
+pi@raspberrypi:/var/www/html/sandbox-3 $ echo "test change 2" > test-case-2.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git add test-case-2.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git commit -m"making test case 2 change"
+[test-case-2 4fb657d] making test case 2 change
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test-case-2.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout -b test-case-3
+Switched to a new branch 'test-case-3'
+pi@raspberrypi:/var/www/html/sandbox-3 $ echo "test change 3" > test-case-3.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git add test-case-3.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git commit -m"making test case 3 change"
+[test-case-3 59779ee] making test case 3 change
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test-case-3.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout test-case-1
+Switched to branch 'test-case-1'
+pi@raspberrypi:/var/www/html/sandbox-3 $ git push origin test-case-1
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 299 bytes | 149.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'test-case-1' on GitHub by visiting:
+remote:      https://github.com/perlick/sftp-git-ide-test/pull/new/test-case-1
+remote:
+To https://github.com/perlick/sftp-git-ide-test.git
+ * [new branch]      test-case-1 -> test-case-1
+pi@raspberrypi:/var/www/html/sandbox-3 $ echo "created PR and merged on Github"
+created PR and merged on Github
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+pi@raspberrypi:/var/www/html/sandbox-3 $ git pull origin master
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+remote: Enumerating objects: 1, done.
+remote: Counting objects: 100% (1/1), done.
+remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (1/1), done.
+From https://github.com/perlick/sftp-git-ide-test
+ * branch            master     -> FETCH_HEAD
+   a0ef39f..a43031a  master     -> origin/master
+Updating a0ef39f..a43031a
+Fast-forward
+ test-case-1.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test-case-1.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git push deploy master
+pi@192.168.1.130's password:
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 917 bytes | 917.00 KiB/s, done.
+Total 4 (delta 1), reused 0 (delta 0)
+remote: Ref refs/heads/master received. Deploying master branch to production...
+remote: Already on 'master'
+remote: sending incremental file list
+remote: ./
+remote: test-case-1.txt
+remote:
+remote: sent 791 bytes  received 133 bytes  1,848.00 bytes/sec
+remote: total size is 231  speedup is 0.25
+To ssh://192.168.1.130/var/www/git/deploy.git
+   a0ef39f..a43031a  master -> master
+pi@raspberrypi:/var/www/html/sandbox-3 $ cd ../sandbox-1
+pi@raspberrypi:/var/www/html/sandbox-1 $ git log --oneline --graph --all
+*   a0ef39f (HEAD -> master, origin/master, origin/HEAD, deploy/master) Initial commit
+pi@raspberrypi:/var/www/html/sandbox-1 $ cd ../sandbox-2
+pi@raspberrypi:/var/www/html/sandbox-2 $ git log --oneline --graph --all
+*   a0ef39f (HEAD -> master, origin/master, origin/HEAD, deploy/master) Initial commit
+pi@raspberrypi:/var/www/html/sandbox-2 $ cd ../sandbox-3
+pi@raspberrypi:/var/www/html/sandbox-3 $ git log --oneline --graph --all
+*   a43031a (HEAD -> master, origin/master, origin/HEAD, deploy/master) Merge pull request #15 from perlick/test-case-1
+|\
+| * dd2f2f1 (origin/test-case-1, test-case-1) making test case 1 change
+|/
+| * 59779ee (test-case-3) making test case 3 change
+|/
+| * 4fb657d (test-case-2) making test case 2 change
+|/
+*   a0ef39f Initial commit
+pi@raspberrypi:/var/www/html/sandbox-3 $ cd ../../git/deploy.git/
+pi@raspberrypi:/var/www/git/deploy.git $ git log --oneline --graph --all
+*   a43031a (HEAD -> master) Merge pull request #15 from perlick/test-case-1
+|\
+| * dd2f2f1 making test case 1 change
+|/
+*   a0ef39f Initial commit
+pi@raspberrypi:/var/www/html/sandbox-3 $ cd ../../html/sandbox-1
+pi@raspberrypi:/var/www/html/sandbox-1 $ echo "Transitioning to Git-ISSUE state"
+Transitioning to Git-ISSUE state
+pi@raspberrypi:/var/www/html/sandbox-1 $ git checkout -b trouble-branch
+Switched to a new branch 'trouble-branch'
+pi@raspberrypi:/var/www/html/sandbox-1 $ echo "trouble text" > trouble-file.txt
+pi@raspberrypi:/var/www/html/sandbox-1 $ git add trouble-file.txt
+pi@raspberrypi:/var/www/html/sandbox-1 $ git commit -m"trouble commit"
+[trouble-branch 0af1864] trouble commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 trouble-file.txt
+pi@raspberrypi:/var/www/html/sandbox-1 $ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+pi@raspberrypi:/var/www/html/sandbox-1 $ git merge trouble-branch
+Updating a0ef39f..0af1864
+Fast-forward
+ trouble-file.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 trouble-file.txt
+pi@raspberrypi:/var/www/html/sandbox-1 $ git push deploy master
+pi@192.168.1.130's password:
+To ssh://192.168.1.130/var/www/git/deploy.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'ssh://pi@192.168.1.130/var/www/git/deploy.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+pi@raspberrypi:/var/www/html/sandbox-1 $ git pull deploy master
+pi@192.168.1.130's password:
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 4 (delta 1), reused 0 (delta 0)
+Unpacking objects: 100% (4/4), done.
+From ssh://192.168.1.130/var/www/git/deploy
+ * branch            master     -> FETCH_HEAD
+   a0ef39f..a43031a  master     -> deploy/master
+Merge made by the 'recursive' strategy.
+ test-case-1.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test-case-1.txt
+pi@raspberrypi:/var/www/html/sandbox-1 $ git push deploy master
+pi@192.168.1.130's password:
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 536 bytes | 268.00 KiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0)
+remote: Ref refs/heads/master received. Deploying master branch to production...
+remote: Already on 'master'
+remote: sending incremental file list
+remote: ./
+remote: .gitignore
+remote: index.php
+remote: info.php
+remote: people.txt
+remote: test-case-1.txt
+remote: trouble-file.txt
+remote:
+remote: sent 791 bytes  received 133 bytes  1,848.00 bytes/sec
+remote: total size is 231  speedup is 0.25
+To ssh://192.168.1.130/var/www/git/deploy.git
+   a43031a..bc80afc  master -> master
+pi@raspberrypi:/var/www/html/sandbox-1 $ cd ../../git/deploy.git/
+pi@raspberrypi:/var/www/git/deploy.git $ git log --oneline --all --graph
+*   bc80afc (HEAD -> master) Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+|\
+| *   a43031a Merge pull request #15 from perlick/test-case-1
+| |\
+| | * dd2f2f1 making test case 1 change
+| |/
+* | 0af1864 trouble commit
+|/
+*   a0ef39f Initial commit
+pi@raspberrypi:/var/www/git/deploy.git $ cd ../../html/sandbox-1
+pi@raspberrypi:/var/www/html/sandbox-1 $ git log --oneline --all --graph
+*   bc80afc (HEAD -> master, deploy/master) Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+|\
+| *   a43031a Merge pull request #15 from perlick/test-case-1
+| |\
+| | * dd2f2f1 making test case 1 change
+| |/
+* | 0af1864 (trouble-branch) trouble commit
+|/
+*   a0ef39f (origin/master, origin/HEAD) Initial commit
+pi@raspberrypi:/var/www/html/sandbox-1 $ cd ../../html/sandbox-2
+pi@raspberrypi:/var/www/html/sandbox-2 $ git log --oneline --all --graph
+*   a0ef39f (HEAD -> master, origin/master, origin/HEAD, deploy/master) Initial commit
+pi@raspberrypi:/var/www/html/sandbox-2 $ cd ../../html/sandbox-3
+pi@raspberrypi:/var/www/html/sandbox-3 $ git log --oneline --all --graph
+*   a43031a (HEAD -> master, origin/master, origin/HEAD, deploy/master) Merge pull request #15 from perlick/test-case-1
+|\
+| * dd2f2f1 (origin/test-case-1, test-case-1) making test case 1 change
+|/
+| * 59779ee (test-case-3) making test case 3 change
+|/
+| * 4fb657d (test-case-2) making test case 2 change
+|/
+*   a0ef39f Initial commit
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout -b test-case-4
+Switched to a new branch 'test-case-4'
+pi@raspberrypi:/var/www/html/sandbox-3 $ echo "test change 4" > test-case-4.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git add test-case-4.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git commit -m"making test case 4 change"
+[test-case-4 4ed2b79] making test case 4 change
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test-case-4.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout -b test-case-5
+Switched to a new branch 'test-case-5'
+pi@raspberrypi:/var/www/html/sandbox-3 $ echo "test change 5" > test-case-5.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git add test-case-5.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git commit -m"making test case 5 change"
+[test-case-5 5bef594] making test case 5 change
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test-case-5.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout test-case-4
+Switched to branch 'test-case-4'
+pi@raspberrypi:/var/www/html/sandbox-3 $ git push origin test-case-4
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 301 bytes | 150.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'test-case-4' on GitHub by visiting:
+remote:      https://github.com/perlick/sftp-git-ide-test/pull/new/test-case-4
+remote:
+To https://github.com/perlick/sftp-git-ide-test.git
+ * [new branch]      test-case-4 -> test-case-4
+pi@raspberrypi:/var/www/html/sandbox-3 $ echo "Created PR and merged on github"
+Created PR and merged on github
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+pi@raspberrypi:/var/www/html/sandbox-3 $ git pull origin master
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+remote: Enumerating objects: 1, done.
+remote: Counting objects: 100% (1/1), done.
+remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (1/1), done.
+From https://github.com/perlick/sftp-git-ide-test
+ * branch            master     -> FETCH_HEAD
+   a43031a..ce65b91  master     -> origin/master
+Updating a43031a..ce65b91
+Fast-forward
+ test-case-4.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test-case-4.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git push deploy master
+pi@192.168.1.130's password:
+To ssh://192.168.1.130/var/www/git/deploy.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'ssh://pi@192.168.1.130/var/www/git/deploy.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+pi@raspberrypi:/var/www/html/sandbox-3 $ git pull deploy master
+pi@192.168.1.130's password:
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 5 (delta 2), reused 0 (delta 0)
+Unpacking objects: 100% (5/5), done.
+From ssh://192.168.1.130/var/www/git/deploy
+ * branch            master     -> FETCH_HEAD
+   a43031a..bc80afc  master     -> deploy/master
+Merge made by the 'recursive' strategy.
+ trouble-file.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 trouble-file.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git push deploy master
+pi@192.168.1.130's password:
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (6/6), 1.13 KiB | 578.00 KiB/s, done.
+Total 6 (delta 2), reused 0 (delta 0)
+remote: Ref refs/heads/master received. Deploying master branch to production...
+remote: Already on 'master'
+remote: sending incremental file list
+remote: ./
+remote: test-case-4.txt
+remote:
+remote: sent 415 bytes  received 38 bytes  906.00 bytes/sec
+remote: total size is 245  speedup is 0.54
+To ssh://192.168.1.130/var/www/git/deploy.git
+   bc80afc..fe4b565  master -> master
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout test-case-2
+Switched to branch 'test-case-2'
+pi@raspberrypi:/var/www/html/sandbox-3 $ git push origin test-case-2
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 302 bytes | 151.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'test-case-2' on GitHub by visiting:
+remote:      https://github.com/perlick/sftp-git-ide-test/pull/new/test-case-2
+remote:
+To https://github.com/perlick/sftp-git-ide-test.git
+ * [new branch]      test-case-2 -> test-case-2
+pi@raspberrypi:/var/www/html/sandbox-3 $ echo "Created PR and merged on github"
+Created PR and merged on github
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 3 commits.
+  (use "git push" to publish your local commits)
+pi@raspberrypi:/var/www/html/sandbox-3 $ git pull origin master
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 2 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (2/2), done.
+From https://github.com/perlick/sftp-git-ide-test
+ * branch            master     -> FETCH_HEAD
+   ce65b91..007cfd3  master     -> origin/master
+Merge made by the 'recursive' strategy.
+ test-case-2.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test-case-2.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git push deploy master
+pi@192.168.1.130's password:
+Enumerating objects: 10, done.
+Counting objects: 100% (10/10), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (7/7), 1.14 KiB | 583.00 KiB/s, done.
+Total 7 (delta 3), reused 0 (delta 0)
+remote: Ref refs/heads/master received. Deploying master branch to production...
+remote: Already on 'master'
+remote: sending incremental file list
+remote: ./
+remote: test-case-2.txt
+remote:
+remote: sent 450 bytes  received 38 bytes  976.00 bytes/sec
+remote: total size is 259  speedup is 0.53
+To ssh://192.168.1.130/var/www/git/deploy.git
+   fe4b565..703b503  master -> master
+pi@raspberrypi:/var/www/html/sandbox-3 $ cd ../../git/deploy.git/
+pi@raspberrypi:/var/www/git/deploy.git $ git log --oneline --all --graph
+*   703b503 (HEAD -> master) Merge branch 'master' of https://github.com/perlick/sftp-git-ide-test
+|\
+| *   007cfd3 Merge pull request #17 from perlick/test-case-2
+| |\
+| | * 4fb657d making test case 2 change
+* | |   fe4b565 Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+|\ \ \
+| |/ /
+|/| |
+| * |   bc80afc Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+| |\ \
+| * | | 0af1864 trouble commit
+| | |/
+| |/|
+* | |   ce65b91 Merge pull request #16 from perlick/test-case-4
+|\ \ \
+| |_|/
+|/| |
+| * | 4ed2b79 making test case 4 change
+|/ /
+* |   a43031a Merge pull request #15 from perlick/test-case-1
+|\ \
+| |/
+|/|
+| * dd2f2f1 making test case 1 change
+|/
+*   a0ef39f Initial commit
+pi@raspberrypi:/var/www/git/deploy.git $ git log --oneline --all --graph
+*   703b503 (HEAD -> master) Merge branch 'master' of https://github.com/perlick/sftp-git-ide-test
+|\
+| *   007cfd3 Merge pull request #17 from perlick/test-case-2
+| |\
+| | * 4fb657d making test case 2 change
+* | |   fe4b565 Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+|\ \ \
+| |/ /
+|/| |
+| * |   bc80afc Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+| |\ \
+| * | | 0af1864 trouble commit
+| | |/
+| |/|
+* | |   ce65b91 Merge pull request #16 from perlick/test-case-4
+|\ \ \
+| |_|/
+|/| |
+| * | 4ed2b79 making test case 4 change
+|/ /
+* |   a43031a Merge pull request #15 from perlick/test-case-1
+|\ \
+| |/
+|/|
+| * dd2f2f1 making test case 1 change
+|/
+*   a0ef39f Initial commit
+pi@raspberrypi:/var/www/git/deploy.git $ cd ../../html/sandbox-1
+pi@raspberrypi:/var/www/html/sandbox-1 $ git log --oneline --all --graph
+*   bc80afc (HEAD -> master, deploy/master) Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+|\
+| *   a43031a Merge pull request #15 from perlick/test-case-1
+| |\
+| | * dd2f2f1 making test case 1 change
+| |/
+* | 0af1864 (trouble-branch) trouble commit
+|/
+*   a0ef39f (origin/master, origin/HEAD) Initial commit
+pi@raspberrypi:/var/www/html/sandbox-1 $ cd ../../html/sandbox-2
+pi@raspberrypi:/var/www/html/sandbox-2 $ git log --oneline --all --graph
+*   a0ef39f (HEAD -> master, origin/master, origin/HEAD, deploy/master) Initial commit
+pi@raspberrypi:/var/www/html/sandbox-2 $ cd ../../html/sandbox-3
+pi@raspberrypi:/var/www/html/sandbox-3 $ git log --oneline --all --graph
+*   703b503 (HEAD -> master, deploy/master) Merge branch 'master' of https://github.com/perlick/sftp-git-ide-test
+|\
+| *   007cfd3 (origin/master, origin/HEAD) Merge pull request #17 from perlick/test-case-2
+| |\
+| | * 4fb657d (origin/test-case-2, test-case-2) making test case 2 change
+* | |   fe4b565 Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+|\ \ \
+| |/ /
+|/| |
+| * |   bc80afc Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+| |\ \
+| * | | 0af1864 trouble commit
+| | |/
+| |/|
+* | |   ce65b91 Merge pull request #16 from perlick/test-case-4
+|\ \ \
+| |_|/
+|/| |
+| * | 4ed2b79 (origin/test-case-4, test-case-4) making test case 4 change
+|/ /
+| | * 5bef594 (test-case-5) making test case 5 change
+| |/
+|/|
+* |   a43031a Merge pull request #15 from perlick/test-case-1
+|\ \
+| |/
+|/|
+| * dd2f2f1 (origin/test-case-1, test-case-1) making test case 1 change
+|/
+| * 59779ee (test-case-3) making test case 3 change
+|/
+*   a0ef39f Initial commit
+pi@raspberrypi:/var/www/html/sandbox-3 $ cd ../sandbox-2
+pi@raspberrypi:/var/www/html/sandbox-2 $ echo "transitioning from Git-ISSUE to Git-FIX"
+transitioning from Git-ISSUE to Git-FIX
+pi@raspberrypi:/var/www/html/sandbox-2 $ git checkout master
+Already on 'master'
+Your branch is up to date with 'origin/master'.
+pi@raspberrypi:/var/www/html/sandbox-2 $ git pull origin master
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+remote: Enumerating objects: 14, done.
+remote: Counting objects: 100% (14/14), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 13 (delta 4), reused 7 (delta 2), pack-reused 0
+Unpacking objects: 100% (13/13), done.
+From https://github.com/perlick/sftp-git-ide-test
+ * branch            master     -> FETCH_HEAD
+   a0ef39f..007cfd3  master     -> origin/master
+Updating a0ef39f..007cfd3
+Fast-forward
+ test-case-1.txt | 1 +
+ test-case-2.txt | 1 +
+ test-case-4.txt | 1 +
+ 3 files changed, 3 insertions(+)
+ create mode 100644 test-case-1.txt
+ create mode 100644 test-case-2.txt
+ create mode 100644 test-case-4.txt
+pi@raspberrypi:/var/www/html/sandbox-2 $ git checkout -b git-fix
+Switched to a new branch 'git-fix'
+pi@raspberrypi:/var/www/html/sandbox-2 $ git pull deploy master
+pi@192.168.1.130's password:
+remote: Enumerating objects: 13, done.
+remote: Counting objects: 100% (13/13), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 9 (delta 4), reused 0 (delta 0)
+Unpacking objects: 100% (9/9), done.
+From ssh://192.168.1.130/var/www/git/deploy
+ * branch            master     -> FETCH_HEAD
+   a0ef39f..703b503  master     -> deploy/master
+Updating 007cfd3..703b503
+Fast-forward
+ trouble-file.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 trouble-file.txt
+pi@raspberrypi:/var/www/html/sandbox-2 $ git push origin git-fix
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+Enumerating objects: 13, done.
+Counting objects: 100% (13/13), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (9/9), 1022 bytes | 204.00 KiB/s, done.
+Total 9 (delta 4), reused 0 (delta 0)
+remote: Resolving deltas: 100% (4/4), completed with 1 local object.
+remote:
+remote: Create a pull request for 'git-fix' on GitHub by visiting:
+remote:      https://github.com/perlick/sftp-git-ide-test/pull/new/git-fix
+remote:
+To https://github.com/perlick/sftp-git-ide-test.git
+ * [new branch]      git-fix -> git-fix
+pi@raspberrypi:/var/www/html/sandbox-2 $ echo "Created PR and merged on github"
+Created PR and merged on github
+pi@raspberrypi:/var/www/html/sandbox-2 $ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+pi@raspberrypi:/var/www/html/sandbox-2 $ git pull origin master
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+remote: Enumerating objects: 1, done.
+remote: Counting objects: 100% (1/1), done.
+remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (1/1), done.
+From https://github.com/perlick/sftp-git-ide-test
+ * branch            master     -> FETCH_HEAD
+   007cfd3..4d8f675  master     -> origin/master
+Updating 007cfd3..4d8f675
+Fast-forward
+ trouble-file.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 trouble-file.txt
+pi@raspberrypi:/var/www/html/sandbox-2 $ git push deploy master
+pi@192.168.1.130's password:
+Enumerating objects: 1, done.
+Counting objects: 100% (1/1), done.
+Writing objects: 100% (1/1), 641 bytes | 641.00 KiB/s, done.
+Total 1 (delta 0), reused 0 (delta 0)
+remote: Ref refs/heads/master received. Deploying master branch to production...
+remote: Already on 'master'
+remote: sending incremental file list
+remote:
+remote: sent 386 bytes  received 12 bytes  796.00 bytes/sec
+remote: total size is 259  speedup is 0.65
+To ssh://192.168.1.130/var/www/git/deploy.git
+   703b503..4d8f675  master -> master
+pi@raspberrypi:/var/www/html/sandbox-2 $ cd ../../git/deploy.git/
+pi@raspberrypi:/var/www/git/deploy.git $ git log --oneline --all --graph
+*   4d8f675 (HEAD -> master) Merge pull request #19 from perlick/git-fix
+|\
+| *   703b503 Merge branch 'master' of https://github.com/perlick/sftp-git-ide-test
+| |\
+| |/
+|/|
+* |   007cfd3 Merge pull request #17 from perlick/test-case-2
+|\ \
+| * | 4fb657d making test case 2 change
+| | *   fe4b565 Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+| | |\
+| |/ /
+|/| |
+| | *   bc80afc Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+| | |\
+| | * | 0af1864 trouble commit
+| |/ /
+* | |   ce65b91 Merge pull request #16 from perlick/test-case-4
+|\ \ \
+| |_|/
+|/| |
+| * | 4ed2b79 making test case 4 change
+|/ /
+* |   a43031a Merge pull request #15 from perlick/test-case-1
+|\ \
+| |/
+|/|
+| * dd2f2f1 making test case 1 change
+|/
+*   a0ef39f Initial commit
+pi@raspberrypi:/var/www/git/deploy.git $ cd ../../html/sandbox-1
+pi@raspberrypi:/var/www/html/sandbox-1 $ git log --oneline --all --graph
+*   bc80afc (HEAD -> master, deploy/master) Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+|\
+| *   a43031a Merge pull request #15 from perlick/test-case-1
+| |\
+| | * dd2f2f1 making test case 1 change
+| |/
+* | 0af1864 (trouble-branch) trouble commit
+|/
+*   a0ef39f (origin/master, origin/HEAD) Initial commit
+pi@raspberrypi:/var/www/html/sandbox-1 $ cd ../../html/sandbox-2
+pi@raspberrypi:/var/www/html/sandbox-2 $ git log --oneline --all --graph
+*   4d8f675 (HEAD -> master, origin/master, origin/HEAD, deploy/master) Merge pull request #19 from perlick/git-fix
+|\
+| *   703b503 (origin/git-fix, git-fix) Merge branch 'master' of https://github.com/perlick/sftp-git-ide-test
+| |\
+| |/
+|/|
+* |   007cfd3 Merge pull request #17 from perlick/test-case-2
+|\ \
+| * | 4fb657d making test case 2 change
+| | *   fe4b565 Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+| | |\
+| |/ /
+|/| |
+| | *   bc80afc Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+| | |\
+| | * | 0af1864 trouble commit
+| |/ /
+* | |   ce65b91 Merge pull request #16 from perlick/test-case-4
+|\ \ \
+| |_|/
+|/| |
+| * | 4ed2b79 making test case 4 change
+|/ /
+* |   a43031a Merge pull request #15 from perlick/test-case-1
+|\ \
+| |/
+|/|
+| * dd2f2f1 making test case 1 change
+|/
+*   a0ef39f Initial commit
+pi@raspberrypi:/var/www/html/sandbox-2 $ cd ../../html/sandbox-3
+pi@raspberrypi:/var/www/html/sandbox-3 $ git log --oneline --all --graph
+*   703b503 (HEAD -> master, deploy/master) Merge branch 'master' of https://github.com/perlick/sftp-git-ide-test
+|\
+| *   007cfd3 (origin/master, origin/HEAD) Merge pull request #17 from perlick/test-case-2
+| |\
+| | * 4fb657d (origin/test-case-2, test-case-2) making test case 2 change
+* | |   fe4b565 Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+|\ \ \
+| |/ /
+|/| |
+| * |   bc80afc Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+| |\ \
+| * | | 0af1864 trouble commit
+| | |/
+| |/|
+* | |   ce65b91 Merge pull request #16 from perlick/test-case-4
+|\ \ \
+| |_|/
+|/| |
+| * | 4ed2b79 (origin/test-case-4, test-case-4) making test case 4 change
+|/ /
+| | * 5bef594 (test-case-5) making test case 5 change
+| |/
+|/|
+* |   a43031a Merge pull request #15 from perlick/test-case-1
+|\ \
+| |/
+|/|
+| * dd2f2f1 (origin/test-case-1, test-case-1) making test case 1 change
+|/
+| * 59779ee (test-case-3) making test case 3 change
+|/
+*   a0ef39f Initial commit
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout master
+Already on 'master'
+Your branch is ahead of 'origin/master' by 4 commits.
+  (use "git push" to publish your local commits)
+pi@raspberrypi:/var/www/html/sandbox-3 $ git pull origin master
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+remote: Enumerating objects: 1, done.
+remote: Counting objects: 100% (1/1), done.
+remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (1/1), done.
+From https://github.com/perlick/sftp-git-ide-test
+ * branch            master     -> FETCH_HEAD
+   007cfd3..4d8f675  master     -> origin/master
+Updating 703b503..4d8f675
+Fast-forward
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout -b test-case-6
+Switched to a new branch 'test-case-6'
+pi@raspberrypi:/var/www/html/sandbox-3 $ echo "test change 6" > test-case-6.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git add test-case-6.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git commit -m"making test case 6 change"
+[test-case-6 75862c4] making test case 6 change
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test-case-6.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout test-case-3
+Switched to branch 'test-case-3'
+pi@raspberrypi:/var/www/html/sandbox-3 $ git push origin test-case-3
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 300 bytes | 150.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'test-case-3' on GitHub by visiting:
+remote:      https://github.com/perlick/sftp-git-ide-test/pull/new/test-case-3
+remote:
+To https://github.com/perlick/sftp-git-ide-test.git
+ * [new branch]      test-case-3 -> test-case-3
+pi@raspberrypi:/var/www/html/sandbox-3 $ echo "Created PR and merged on Github"
+Created PR and merged on Github
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+pi@raspberrypi:/var/www/html/sandbox-3 $ git pull origin master
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 2 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (2/2), done.
+From https://github.com/perlick/sftp-git-ide-test
+ * branch            master     -> FETCH_HEAD
+   4d8f675..92d84df  master     -> origin/master
+Updating 4d8f675..92d84df
+Fast-forward
+ test-case-3.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test-case-3.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git push deploy master
+pi@192.168.1.130's password:
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 926 bytes | 926.00 KiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0)
+remote: Ref refs/heads/master received. Deploying master branch to production...
+remote: Already on 'master'
+remote: sending incremental file list
+remote: ./
+remote: test-case-3.txt
+remote:
+remote: sent 488 bytes  received 38 bytes  1,052.00 bytes/sec
+remote: total size is 273  speedup is 0.52
+To ssh://192.168.1.130/var/www/git/deploy.git
+   4d8f675..92d84df  master -> master
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout test-case-5
+Switched to branch 'test-case-5'
+pi@raspberrypi:/var/www/html/sandbox-3 $ git push origin test-case-5
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 299 bytes | 149.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'test-case-5' on GitHub by visiting:
+remote:      https://github.com/perlick/sftp-git-ide-test/pull/new/test-case-5
+remote:
+To https://github.com/perlick/sftp-git-ide-test.git
+ * [new branch]      test-case-5 -> test-case-5
+pi@raspberrypi:/var/www/html/sandbox-3 $ echo "Created PR and merged on github"
+Created PR and merged on github
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+pi@raspberrypi:/var/www/html/sandbox-3 $ git pull origin master
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 2 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (2/2), done.
+From https://github.com/perlick/sftp-git-ide-test
+ * branch            master     -> FETCH_HEAD
+   92d84df..62f1bcc  master     -> origin/master
+Updating 92d84df..62f1bcc
+Fast-forward
+ test-case-5.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test-case-5.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git push deploy master
+pi@192.168.1.130's password:
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 936 bytes | 936.00 KiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0)
+remote: Ref refs/heads/master received. Deploying master branch to production...
+remote: Already on 'master'
+remote: sending incremental file list
+remote: ./
+remote: test-case-5.txt
+remote:
+remote: sent 534 bytes  received 38 bytes  1,144.00 bytes/sec
+remote: total size is 287  speedup is 0.50
+To ssh://192.168.1.130/var/www/git/deploy.git
+   92d84df..62f1bcc  master -> master
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout test-case-6
+Switched to branch 'test-case-6'
+pi@raspberrypi:/var/www/html/sandbox-3 $ git push origin test-case-6
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 300 bytes | 150.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'test-case-6' on GitHub by visiting:
+remote:      https://github.com/perlick/sftp-git-ide-test/pull/new/test-case-6
+remote:
+To https://github.com/perlick/sftp-git-ide-test.git
+ * [new branch]      test-case-6 -> test-case-6
+pi@raspberrypi:/var/www/html/sandbox-3 $ echo "Created PR and merged on Github"
+Created PR and merged on Github
+pi@raspberrypi:/var/www/html/sandbox-3 $ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+pi@raspberrypi:/var/www/html/sandbox-3 $ git pull origin master
+Username for 'https://github.com': perlick
+Password for 'https://perlick@github.com':
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 2 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (2/2), done.
+From https://github.com/perlick/sftp-git-ide-test
+ * branch            master     -> FETCH_HEAD
+   62f1bcc..231b290  master     -> origin/master
+Updating 62f1bcc..231b290
+Fast-forward
+ test-case-6.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test-case-6.txt
+pi@raspberrypi:/var/www/html/sandbox-3 $ git push deploy master
+pi@192.168.1.130's password:
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 942 bytes | 471.00 KiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0)
+remote: Ref refs/heads/master received. Deploying master branch to production...
+remote: Already on 'master'
+remote: sending incremental file list
+remote: ./
+remote: test-case-6.txt
+remote:
+remote: sent 571 bytes  received 38 bytes  1,218.00 bytes/sec
+remote: total size is 301  speedup is 0.49
+To ssh://192.168.1.130/var/www/git/deploy.git
+   62f1bcc..231b290  master -> master
+pi@raspberrypi:/var/www/html/sandbox-3 $ cd ../../git/deploy.git/
+pi@raspberrypi:/var/www/git/deploy.git $ git log --oneline --graph --all
+*   231b290 (HEAD -> master) Merge pull request #22 from perlick/test-case-6
+|\
+| * 75862c4 making test case 6 change
+* |   62f1bcc Merge pull request #21 from perlick/test-case-5
+|\ \
+| * | 5bef594 making test case 5 change
+* | |   92d84df Merge pull request #20 from perlick/test-case-3
+|\ \ \
+| |_|/
+|/| |
+| * | 59779ee making test case 3 change
+* | |   4d8f675 Merge pull request #19 from perlick/git-fix
+|\ \ \
+| * \ \   703b503 Merge branch 'master' of https://github.com/perlick/sftp-git-ide-test
+| |\ \ \
+| |/ / /
+|/| | |
+* | | |   007cfd3 Merge pull request #17 from perlick/test-case-2
+|\ \ \ \
+| * | | | 4fb657d making test case 2 change
+| | |/ /
+| |/| |
+| | * |   fe4b565 Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+| | |\ \
+| |/ / /
+|/| | |
+| | * |   bc80afc Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+| | |\ \
+| | | |/
+| | * | 0af1864 trouble commit
+| |/ /
+* | |   ce65b91 Merge pull request #16 from perlick/test-case-4
+|\ \ \
+| |_|/
+|/| |
+| * | 4ed2b79 making test case 4 change
+|/ /
+* |   a43031a Merge pull request #15 from perlick/test-case-1
+|\ \
+| |/
+|/|
+| * dd2f2f1 making test case 1 change
+|/
+*   a0ef39f Initial commit
+pi@raspberrypi:/var/www/git/deploy.git $ cd ../../html/sandbox-1
+pi@raspberrypi:/var/www/html/sandbox-1 $ git log --oneline --graph --all
+*   bc80afc (HEAD -> master, deploy/master) Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+|\
+| *   a43031a Merge pull request #15 from perlick/test-case-1
+| |\
+| | * dd2f2f1 making test case 1 change
+| |/
+* | 0af1864 (trouble-branch) trouble commit
+|/
+*   a0ef39f (origin/master, origin/HEAD) Initial commit
+pi@raspberrypi:/var/www/html/sandbox-1 $ cd ../../html/sandbox-2
+pi@raspberrypi:/var/www/html/sandbox-2 $ git log --oneline --graph --all
+*   4d8f675 (HEAD -> master, origin/master, origin/HEAD, deploy/master) Merge pull request #19 from perlick/git-fix
+|\
+| *   703b503 (origin/git-fix, git-fix) Merge branch 'master' of https://github.com/perlick/sftp-git-ide-test
+| |\
+| |/
+|/|
+* |   007cfd3 Merge pull request #17 from perlick/test-case-2
+|\ \
+| * | 4fb657d making test case 2 change
+| | *   fe4b565 Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+| | |\
+| |/ /
+|/| |
+| | *   bc80afc Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+| | |\
+| | * | 0af1864 trouble commit
+| |/ /
+* | |   ce65b91 Merge pull request #16 from perlick/test-case-4
+|\ \ \
+| |_|/
+|/| |
+| * | 4ed2b79 making test case 4 change
+|/ /
+* |   a43031a Merge pull request #15 from perlick/test-case-1
+|\ \
+| |/
+|/|
+| * dd2f2f1 making test case 1 change
+|/
+*   a0ef39f Initial commit
+pi@raspberrypi:/var/www/html/sandbox-2 $ cd ../../html/sandbox-3
+pi@raspberrypi:/var/www/html/sandbox-3 $ git log --oneline --graph --all
+*   231b290 (HEAD -> master, origin/master, origin/HEAD, deploy/master) Merge pull request #22 from perlick/test-case-6
+|\
+| * 75862c4 (origin/test-case-6, test-case-6) making test case 6 change
+* |   62f1bcc Merge pull request #21 from perlick/test-case-5
+|\ \
+| * | 5bef594 (origin/test-case-5, test-case-5) making test case 5 change
+* | |   92d84df Merge pull request #20 from perlick/test-case-3
+|\ \ \
+| |_|/
+|/| |
+| * | 59779ee (origin/test-case-3, test-case-3) making test case 3 change
+* | |   4d8f675 Merge pull request #19 from perlick/git-fix
+|\ \ \
+| * \ \   703b503 Merge branch 'master' of https://github.com/perlick/sftp-git-ide-test
+| |\ \ \
+| |/ / /
+|/| | |
+* | | |   007cfd3 Merge pull request #17 from perlick/test-case-2
+|\ \ \ \
+| * | | | 4fb657d (origin/test-case-2, test-case-2) making test case 2 change
+| | |/ /
+| |/| |
+| | * |   fe4b565 Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+| | |\ \
+| |/ / /
+|/| | |
+| | * |   bc80afc Merge branch 'master' of ssh://192.168.1.130/var/www/git/deploy
+| | |\ \
+| | | |/
+| | * | 0af1864 trouble commit
+| |/ /
+* | |   ce65b91 Merge pull request #16 from perlick/test-case-4
+|\ \ \
+| |_|/
+|/| |
+| * | 4ed2b79 (origin/test-case-4, test-case-4) making test case 4 change
+|/ /
+* |   a43031a Merge pull request #15 from perlick/test-case-1
+|\ \
+| |/
+|/|
+| * dd2f2f1 (origin/test-case-1, test-case-1) making test case 1 change
+|/
+*   a0ef39f Initial commit
+pi@raspberrypi:/var/www/html/sandbox-3 $ echo "Test finished"
+Test finished
+pi@raspberrypi:/var/www/html/sandbox-3 $ 

@@ -1,0 +1,155 @@
+<html>
+<head>
+  <script>
+    function process(){
+      prompt_regex = document.getElementById('prompt').value;
+      log_raw = document.getElementById('log').value;
+
+      //replace new lines with <br>
+      log_raw = log_raw.replace( /\n\r?/g, '<br>');
+      log_raw = log_raw.concat('<br>');
+
+      //separate commands and results
+      log_raw = log_raw.replace(new RegExp(prompt_regex + ".*?<br>", 'g'), '</div><div class="command">$&</div><div class="result">');
+      log_raw = log_raw.replace(new RegExp("</div>"), '');
+      log_raw = log_raw.concat("</div>");
+
+      //remove empty results
+      log_raw = log_raw.replace(new RegExp('<div class="result">\\s*?</div>', 'g'), '');
+
+      //set name="current" and display block for first command
+      log_raw = log_raw.replace(new RegExp('<div class="command">'), '<div class="command" name="current" style="display: block">');
+
+      //add prompt highlighting
+      log_raw = log_raw.replace(new RegExp(prompt_regex, 'g'), '<span class="prompt">$&</span>');
+
+      //add head and style elements to log
+      head_style = '<head>  <script>    document.addEventListener("keypress", function(event) {      if (event.keyCode == 106) {        current = document.getElementsByName("current")[0];        if(current.nextSibling.getAttribute("name") !== "stop") {          current.setAttribute("name", "");          current.nextSibling.style.display = "block";          current.nextSibling.setAttribute("name", "current");          window.scrollTo(0,document.body.scrollHeight);        }      }      if (event.keyCode == 107) {        current = document.getElementsByName("current")[0];        if(current.previousSibling.getAttribute("name") !== "stop") {          current.setAttribute("name", "");          current.style.display = "none";          current.previousSibling.style.display = "block";          current.previousSibling.setAttribute("name", "current");          window.scrollTo(0,document.body.scrollHeight);        }      }    })    function showAll(){      commands = document.getElementsByClassName("command");      results = document.getElementsByClassName("result");      var i;      for (i = 0; i < commands.length; i++) {        commands.item(i).style.display = "block";        commands.item(i).setAttribute("name", "");      }      for (i = 0; i < results.length; i++) {        results.item(i).style.display = "block";        results.item(i).setAttribute("name", "");      }      commands.item(commands.length - 1).style.display = "block";      commands.item(commands.length - 1).setAttribute("name", "current");    }    function reset(){      commands = document.getElementsByClassName("command");      results = document.getElementsByClassName("result");      var i;      for (i = 0; i < commands.length; i++) {        commands.item(i).style.display = "none";        commands.item(i).setAttribute("name", "");      }      for (i = 0; i < results.length; i++) {        results.item(i).style.display = "none";        results.item(i).setAttribute("name", "");      }      commands.item(0).style.display = "block";      commands.item(0).setAttribute("name", "current");    }    function number(){      commands = document.getElementsByClassName("command");      var i;      for (i = 0; i < commands.length; i++) {        var newItem = document.createElement("SPAN");        newItem.setAttribute("class", "line-number");        var textnode = document.createTextNode(i+1 + " ");        newItem.appendChild(textnode);        commands.item(i).insertBefore(newItem, commands.item(i).childNodes[0]);      }    }  </scr'+'ipt></head><style>  .prompt {    color: lightgreen;  }  .workingDIR {    color: rgb(129, 191, 212);  }  .line-number {    color: gray;  }  .note {    display: block;    color: gray;    float: right;  }  body {    background-color: #282C34;    color: white;    font-family: "Lucida Console", Courier, monospace;  }  div {    display: none;  }</style>';
+      log_raw = head_style.concat(log_raw);
+
+      //wrap in <html> tags
+      log_raw = "<html>".concat(log_raw).concat("</html>");
+
+      //test code to view string as page
+      var wnd = window.open("about:blank", "_blank");
+      wnd.document.write(log_raw);
+    }
+  </script>
+  <script>
+  document.addEventListener("keypress", function(event) {
+      if (event.keyCode == 106) {
+        current = document.getElementsByName("current")[0];
+        if(current.nextSibling.getAttribute("name") !== 'stop') {
+          current.setAttribute("name", "");
+          current.nextSibling.style.display = "block";
+          current.nextSibling.setAttribute("name", "current");
+          window.scrollTo(0,document.body.scrollHeight);
+        }
+      }
+      if (event.keyCode == 107) {
+        current = document.getElementsByName("current")[0];
+        if(current.previousSibling.getAttribute("name") !== 'stop') {
+          current.setAttribute("name", "");
+          current.style.display = "none";
+          current.previousSibling.style.display = "block";
+          current.previousSibling.setAttribute("name", "current");
+          window.scrollTo(0,document.body.scrollHeight);
+        }
+      }
+    })
+
+    function showAll(){
+      commands = document.getElementsByClassName("command");
+      results = document.getElementsByClassName("result");
+      var i;
+      for (i = 0; i < commands.length; i++) {
+        commands.item(i).style.display = "block";
+        commands.item(i).setAttribute("name", "");
+      }
+      for (i = 0; i < results.length; i++) {
+        results.item(i).style.display = "block";
+        results.item(i).setAttribute("name", "");
+      }
+      commands.item(commands.length - 1).style.display = "block";
+      commands.item(commands.length - 1).setAttribute("name", "current");
+    }
+
+    function reset(){
+      commands = document.getElementsByClassName("command");
+      results = document.getElementsByClassName("result");
+      var i;
+      for (i = 0; i < commands.length; i++) {
+        commands.item(i).style.display = "none";
+        commands.item(i).setAttribute("name", "");
+      }
+      for (i = 0; i < results.length; i++) {
+        results.item(i).style.display = "none";
+        results.item(i).setAttribute("name", "");
+      }
+      commands.item(0).style.display = "block";
+      commands.item(0).setAttribute("name", "current");
+    }
+
+    function number(){
+      commands = document.getElementsByClassName("command");
+      var i;
+      for (i = 0; i < commands.length; i++) {
+        var newItem = document.createElement("SPAN");
+        newItem.setAttribute("class", "line-number");
+        var textnode = document.createTextNode(i+1 + " ");
+        newItem.appendChild(textnode);
+        commands.item(i).insertBefore(newItem, commands.item(i).childNodes[0]);
+      }
+    }
+  </script>
+</head>
+<style>
+  .command {
+    display: none;
+  }
+  .result {
+    display: none;
+  }
+  .prompt {
+    color: lightgreen;
+  }
+  .workingDIR {
+    color: rgb(129, 191, 212);
+  }
+  .line-number {
+    color: gray;
+  }
+  .note {
+    display: block;
+    color: gray;
+    float: right;
+  }
+  body {
+    background-color: #282C34;
+    color: white;
+    font-family: "Lucida Console", Courier, monospace;
+  }
+</style>
+<body>
+    <label for="prompt">Prompt Regex:</label>
+    <input type="text" id="prompt" name="prompt" value="pi@raspberrypi"><br>
+
+    <label for="log">Terminal Log Text:</label><br>
+    <!-- <textarea name="message" id="log" rows="20" cols="50">Paste your terminal session log here.</textarea><br> -->
+    <textarea name="message" id="log" rows="20" cols="50">Wi-Fi is currently blocked by rfkill.
+    Use raspi-config to set the country before use.
+
+    pi@raspberrypi:~ $ cd /var/www/git/deploy.git/
+    pi@raspberrypi:/var/www/git/deploy.git $ git log --oneline --graph --all
+    *   a0ef39f (HEAD -> master) Initial commit
+    pi@raspberrypi:/var/www/git/deploy.git $ cd /var/www/html/sandbox-1
+    pi@raspberrypi:/var/www/html/sandbox-1 $ git log --oneline --graph --all
+    *   a0ef39f (HEAD -> master, origin/master, origin/HEAD, deploy/master) Initial commit
+    pi@raspberrypi:/var/www/html/sandbox-1 $ cd /var/www/html/sandbox-2</textarea><br>
+    <button onclick="process()">Preview</button>
+    <!-- <center>Press 'j' to advance and 'k' to backtrack.</center>
+
+    <center><button onclick="showAll()">View All</button><button onclick="reset()">Reset</button></center>
+    <div id="preview" style="display: block;"></div>-->
+</body>
+</html>
