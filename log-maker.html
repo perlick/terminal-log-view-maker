@@ -174,25 +174,15 @@
   }
 </style>
 <body>
-
-    <label for="log">Step 1 -- Terminal Log Text:</label><br>
+<center>
+    <label for="log">Step 1: Paste Terminal Output:</label><br>
     <!-- <textarea name="message" id="log" rows="20" cols="50">Paste your terminal session log here.</textarea><br> -->
-    <textarea name="message" id="log" rows="20" cols="50" oninput="generate_sample()">
-Wi-Fi is currently blocked by rfkill.
-Use raspi-config to set the country before use.
-
-pi@raspberrypi:~ $ cd /var/www/git/deploy.git/
-pi@raspberrypi:/var/www/git/deploy.git $ git log --oneline --graph --all
-*   a0ef39f (HEAD -> master) Initial commit
-pi@raspberrypi:/var/www/git/deploy.git $ cd /var/www/html/sandbox-1
-pi@raspberrypi:/var/www/html/sandbox-1 $ git log --oneline --graph --all
-*   a0ef39f (HEAD -> master, origin/master, origin/HEAD, deploy/master) Initial commit
-pi@raspberrypi:/var/www/html/sandbox-1 $ cd /var/www/html/sandbox-2</textarea><br>
+    <textarea name="message" id="log" rows="20" cols="50" oninput="generate_sample()" placeholder="Copy/Paste the output from your terminal session here!"></textarea><br>
     <label for="prompt">Step 2 -- Prompt Regex:</label>
-    <input type="text" id="prompt" name="prompt" oninput="generate_sample()" value="pi@raspberrypi:"><br>
+    <input type="text" id="prompt" name="prompt" oninput="generate_sample()" placeholder="Example -- pi@raspberrypi:"><br>
 
-    <button onclick="process()">Preview</button>
-
+    <button onclick="process()">Test</button>
+</center>
     <div id="sample"></div>
 </body>
 </html>
